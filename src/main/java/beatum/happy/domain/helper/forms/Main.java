@@ -46,7 +46,7 @@ public class Main extends JFrame {
     private JComboBox comboxOfInstance;
 
     //Button of start
-    private JButton buttonOfStart;
+    //private JButton buttonOfStart;
 
 
     public Main(String title, IinstanceService instanceService) {
@@ -136,10 +136,10 @@ public class Main extends JFrame {
         add(panelOfInstance);
 
         //start
-        buttonOfStart = new JButton();
-        buttonOfStart.setText("Start");
-        buttonOfStart.addMouseListener(new MouseListenerOfStart());
-        add(buttonOfStart);
+        //buttonOfStart = new JButton();
+        //buttonOfStart.setText("Start");
+        //buttonOfStart.addMouseListener(new MouseListenerOfStart());
+        //add(buttonOfStart);
 
         //load all instance items
         loadAllInstanceItems();
@@ -188,6 +188,7 @@ public class Main extends JFrame {
             System.out.println(absoluteJarPath);
              */
 
+            /*
             String hostName = textHostName.getText();
             if (null == hostName || hostName.trim().equals("")) {
                 JOptionPane.showMessageDialog(new JFrame(), "Enter your host name please!!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -235,6 +236,8 @@ public class Main extends JFrame {
 
             JOptionPane.showMessageDialog(new JFrame(), message.toString(), "Info", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Done...");
+
+            */
         }
 
         public void mousePressed(MouseEvent e) {
