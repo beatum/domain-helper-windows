@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.List;
 
 import static beatum.happy.domain.helper.utility.utils.getImage;
@@ -219,15 +218,20 @@ public class Main extends JFrame {
             }
 
             StringBuffer message = new StringBuffer();
-            // 1. Change host name
+
+            //0. Join domain
+            Response responseOfJoinDomain = utils.joinDomain(null,instance.getDomain(), instance.getAccount(), instance.getPassword());
+            message.append(responseOfJoinDomain.getMessage() + "\n");
+            //1.Change host name
             Response responseOfChangeHostName = utils.changeHostName(hostName);
             message.append(responseOfChangeHostName.getMessage() + "\n");
             //2.ChangeNetBIOS
             Response responseOfChangeNetBIOS = utils.changeNetBIOSName(hostName);
             message.append(responseOfChangeNetBIOS.getMessage() + "\n");
-            //3.Undo join domain
-            Response responseOfJoinDoamin = utils.joinDomain(instance.getDomain(), instance.getAccount(), instance.getPassword());
-            message.append(responseOfJoinDoamin.getMessage() + "\n");
+
+            //3.Join domain
+            //Response responseOfJoinDoamin = utils.joinDomain(hostName,instance.getDomain(), instance.getAccount(), instance.getPassword());
+            //message.append(responseOfJoinDoamin.getMessage() + "\n");
 
             JOptionPane.showMessageDialog(new JFrame(), message.toString(), "Info", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Done...");
@@ -277,7 +281,7 @@ public class Main extends JFrame {
                 }
 
                 //3.Undo join domain
-                Response responseOfJoinDoamin = utils.joinDomain(instance.getDomain(), instance.getAccount(), instance.getPassword());
+                Response responseOfJoinDoamin = utils.joinDomain(null,instance.getDomain(), instance.getAccount(), instance.getPassword());
                 JOptionPane.showMessageDialog(new JFrame(), responseOfJoinDoamin.getMessage(), "Info", JOptionPane.INFORMATION_MESSAGE);
             }
 

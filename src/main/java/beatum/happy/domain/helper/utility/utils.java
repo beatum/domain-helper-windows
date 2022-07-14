@@ -118,10 +118,10 @@ public class utils {
     /*
      * Change host name
      * */
-    public static Response joinDomain(String domain, String account, String password) {
+    public static Response joinDomain(String serverName,String domain, String account, String password) {
         Response response = new Response();
         try {
-            int result = MyNetapi32.INSTANCE.NetJoinDomain(null, domain, null, account, password, (MyNetapi32.NETSETUP_JOIN_DOMAIN | MyNetapi32.NETSETUP_DOMAIN_JOIN_IF_JOINED | MyNetapi32.NETSETUP_ACCT_CREATE));
+            int result = MyNetapi32.INSTANCE.NetJoinDomain(serverName, domain, null, account, password, (MyNetapi32.NETSETUP_JOIN_DOMAIN | MyNetapi32.NETSETUP_DOMAIN_JOIN_IF_JOINED | MyNetapi32.NETSETUP_ACCT_CREATE));
             if (result <= 0) {
                 response.setMessage("Join Domain[Successfully]");
                 response.setResult(true);
