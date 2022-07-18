@@ -46,7 +46,7 @@ public class Main extends JFrame {
     private JComboBox comboxOfInstance;
 
     //Button of start
-    //private JButton buttonOfStart;
+    private JButton buttonOfStart;
 
 
     public Main(String title, IinstanceService instanceService) {
@@ -136,10 +136,10 @@ public class Main extends JFrame {
         add(panelOfInstance);
 
         //start
-        //buttonOfStart = new JButton();
-        //buttonOfStart.setText("Start");
-        //buttonOfStart.addMouseListener(new MouseListenerOfStart());
-        //add(buttonOfStart);
+        buttonOfStart = new JButton();
+        buttonOfStart.setText("Start");
+        buttonOfStart.addMouseListener(new MouseListenerOfStart());
+        add(buttonOfStart);
 
         //load all instance items
         loadAllInstanceItems();
@@ -188,7 +188,7 @@ public class Main extends JFrame {
             System.out.println(absoluteJarPath);
              */
 
-            /*
+
             String hostName = textHostName.getText();
             if (null == hostName || hostName.trim().equals("")) {
                 JOptionPane.showMessageDialog(new JFrame(), "Enter your host name please!!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -220,24 +220,25 @@ public class Main extends JFrame {
 
             StringBuffer message = new StringBuffer();
 
-            //0. Join domain
-            Response responseOfJoinDomain = utils.joinDomain(null,instance.getDomain(), instance.getAccount(), instance.getPassword());
-            message.append(responseOfJoinDomain.getMessage() + "\n");
+            //0.change host name by registry
+            Response responseOfChangeHostNameByRegistry = utils.setComputerByRegistry(hostName);
+            message.append(responseOfChangeHostNameByRegistry.getMessage() + "\n");
+
+
             //1.Change host name
             Response responseOfChangeHostName = utils.changeHostName(hostName);
             message.append(responseOfChangeHostName.getMessage() + "\n");
+
             //2.ChangeNetBIOS
             Response responseOfChangeNetBIOS = utils.changeNetBIOSName(hostName);
             message.append(responseOfChangeNetBIOS.getMessage() + "\n");
 
-            //3.Join domain
-            //Response responseOfJoinDoamin = utils.joinDomain(hostName,instance.getDomain(), instance.getAccount(), instance.getPassword());
-            //message.append(responseOfJoinDoamin.getMessage() + "\n");
+            //3. Join domain
+            Response responseOfJoinDomain = utils.joinDomain(null, instance.getDomain(), instance.getAccount(), instance.getPassword());
+            message.append(responseOfJoinDomain.getMessage() + "\n");
 
             JOptionPane.showMessageDialog(new JFrame(), message.toString(), "Info", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Done...");
-
-            */
         }
 
         public void mousePressed(MouseEvent e) {
@@ -284,7 +285,7 @@ public class Main extends JFrame {
                 }
 
                 //3.Undo join domain
-                Response responseOfJoinDoamin = utils.joinDomain(null,instance.getDomain(), instance.getAccount(), instance.getPassword());
+                Response responseOfJoinDoamin = utils.joinDomain(null, instance.getDomain(), instance.getAccount(), instance.getPassword());
                 JOptionPane.showMessageDialog(new JFrame(), responseOfJoinDoamin.getMessage(), "Info", JOptionPane.INFORMATION_MESSAGE);
             }
 
